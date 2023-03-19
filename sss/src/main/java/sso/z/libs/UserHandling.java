@@ -185,20 +185,79 @@ public class UserHandling {
         }
     }
 
+    private static class LoadShop_V {
+        static long timeUsingApp = System.currentTimeMillis() / 60000;
+        static double rating = Math.random() * 5;
+        static JSONArray usersArray = READ_JSON(0);
+        static int randomIndex = (int) (Math.random() * usersArray.size());
+        static JSONObject user = (JSONObject) usersArray.get(randomIndex);
+        static String userName = (String) user.get("sellname");
+        static long userId = (Long) user.get("sellid");
+        static String phoneNumber = (String) user.get("phonenumber");
+        static String email = (String) user.get("email");
+        static String location = (String) user.get("location");
+
+        static JSONArray productsArray = READ_JSON(1);
+        static JSONObject seller = (JSONObject) productsArray.get(randomIndex);
+        static String product = (String) seller.get("product");
+        static String price = (String) seller.get("price");
+
+        public static void showSimpleShop(int TYPE) {
+            switch (TYPE) {
+                case 0:
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println("\n" + "User Name: " + userName + "ID:" + userId);
+                        System.out.println("\n" + "Product: " + product + "$" + price);
+                        System.out.println("Rating: " + rating);
+                        System.out.println("Phone number: " + phoneNumber);
+                        System.out.println("Location: " + location);
+                    }
+                    System.out.println("Mostrando 3 objetos.");
+                    break;
+                case 1:
+                    for (int j = 0; j < 5; j++) {
+                        System.out.println("\n" + "Product: " + product + "$" + price);
+                    }
+                    break;
+                case 2:
+                    for (int k = 0; k < 2; k++) {
+                        System.out.println("\n" + "User Name: " + userName + "\tid:" + userId);
+                        System.out.println("\n" + "Product: " + product + "$" + price);
+                        System.out.println("Rating: " + rating);
+                    }
+                    System.out.println("Mostrando 2 objetos.");
+                    break;
+            }
+        }
+        /*
+         * System.out.println("User Name: " + userName);
+         * System.out.println("User ID: " + userId);
+         * 
+         * System.out.println("Rating: " + rating);
+         * System.out.println("Contact: " + phoneNumber);
+         * System.out.println("Email: " + email);
+         * System.out.println("Location: " + location);
+         */
+    }
+
     // idk how to use this lmaoooo
     private static void SIGN_IN_AFTER(int TYPE) {
+        System.out.println("Time Using App: " + LoadShop_V.timeUsingApp);
+
         switch (TYPE) {
-            case 0:
-                LoadShop.SHOP_ALL(1);
+            case 0: // sign user use "TYPE" for direct access
+                System.out.println("Bienvenido usuario.\n");
+                LoadShop_V.showSimpleShop(TYPE);
                 break;
-            case 1:
+            case 1: // sign seller
                 Scanner scanner = new Scanner(System.in);
                 String LeProduct;
-                int LePrice, idk;
+                int LePrice;
                 JSONObject user = new JSONObject();
-                System.out.println("Bienvenido vendedor.\n" + "1.Cargar producto." + "0. Salir.");
-                idk = scanner.nextInt();
-                switch (idk) {
+                System.out.println(
+                        "Bienvenido vendedor.\n" + "1. Cargar producto." + "2. Mostrar productos" + "0. Salir.");
+                int sellerChoice = scanner.nextInt();
+                switch (sellerChoice) {
                     case 1:
                         System.out.println("Nombre del producto:");
                         LeProduct = scanner.nextLine();
@@ -210,50 +269,37 @@ public class UserHandling {
                         LePrice = (int) user.get("price");
                         scanner.close();
                         break;
+                    case 2:
+                        LoadShop_V.showSimpleShop(1);
                 }
+                break;
+            case 2: { // not sign use "TYPE" for direct access
+                LoadShop_V.showSimpleShop(TYPE);
+                break;
+            }
         }
     }
 
     // im losing my mind
     public static class LoadShop {
         // istg im gonna end it
-        private static class LoadShop_V {
-            static long timeUsingApp = System.currentTimeMillis() / 60000;
-            double rating = Math.random() * 5;
-
-            JSONArray usersArray = READ_JSON(0);
-            int randomIndex = (int) (Math.random() * usersArray.size());
-            JSONObject user = (JSONObject) usersArray.get(randomIndex);
-            String userName = (String) user.get("realname");
-            long userId = (Long) user.get("id");
-            String phoneNumber = (String) user.get("phonenumber");
-            String email = (String) user.get("email");
-            String location = (String) user.get("location");
-
-            /*
-             * System.out.println("User Name: " + userName);
-             * System.out.println("User ID: " + userId);
-             * 
-             * System.out.println("Rating: " + rating);
-             * System.out.println("Contact: " + phoneNumber);
-             * System.out.println("Email: " + email);
-             * System.out.println("Location: " + location);
-             */
-        }
-
         public static void SHOP_ALL(int TYPE) {
-            System.out.println("Time Using App: " + LoadShop_V.timeUsingApp);
+
             switch (TYPE) {
                 case 0: { // not sign in for main case 3
+                    SIGN_IN_AFTER(2);
                     break;
                 }
 
-                case 1: { // sign in
+                case 1: { // sign in type user
+                    SIGN_IN_AFTER(0);
                     break;
                 }
 
-                default:
+                case 2: { // sign in type seller
+                    SIGN_IN_AFTER(1);
                     break;
+                }
             }
         }
     }
