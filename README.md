@@ -1,4 +1,4 @@
-# **sss**
+# **Simulated shop**
 
 _This simple University project is a Java program that implements a simple shop with user handling and main menu. It allows users to create an account, browse items, and purchase items._
 
@@ -27,11 +27,3 @@ showSimpleShop();
 - When a user opens the program, they are prompted to create an account or log in if they already have an account. Once they have logged in, they are taken to the main menu where they can browse items, view the contents of their cart, and check out.
 - If they choose to browse items, they are shown a list of available items.
 - Once they are ready to check out, they can select the check-out option and complete their purchase. The program will deduct the user's balance and update the inventory of the item.
-
-## How to Run
-
-- To run this program, follow these steps:
-- Clone the repository to your local machine.
-- Open the repository in your Java development environment. _(Maven is preferable)_
-- Run the program.
-- Follow the prompts to create an account or log in and navigate the program.
