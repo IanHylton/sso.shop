@@ -229,15 +229,6 @@ public class UserHandling {
                     break;
             }
         }
-        /*
-         * System.out.println("User Name: " + userName);
-         * System.out.println("User ID: " + userId);
-         * 
-         * System.out.println("Rating: " + rating);
-         * System.out.println("Contact: " + phoneNumber);
-         * System.out.println("Email: " + email);
-         * System.out.println("Location: " + location);
-         */
     }
 
     // idk how to use this lmaoooo
